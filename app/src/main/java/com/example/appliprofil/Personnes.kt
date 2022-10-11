@@ -20,32 +20,31 @@ import com.example.appliprofil.ui.theme.ExpandableSearchView
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Series(navController : NavController, viewModel :MainViewModel){
-    val series by viewModel.series.collectAsState()
-    var sname by rememberSaveable { mutableStateOf("") }
+fun Personnes (navController : NavController, viewModel: MainViewModel){
+    val personnes by viewModel.personnes.collectAsState()
+    var pname by rememberSaveable { mutableStateOf("") }
     Scaffold(
         topBar = {
             TopAppBar(
                 {
                     ExpandableSearchView(
-                        searchDisplay = sname , //val par défaut
-                        onSearchDisplayChanged = {sname = it}, //changement à saisie
-                        onSearchDisplayClosed = {sname =""} //changement à fermeture de recherche
+                        searchDisplay = pname , //val par défaut
+                        onSearchDisplayChanged = {pname = it}, //changement à saisie
+                        onSearchDisplayClosed = {pname =""} //changement à fermeture de recherche
                     )
                 }
             )
         },
 
         content = {
-            if (series.isEmpty()|| sname.isEmpty()) viewModel.lastSerie()
-            if (sname.isNotEmpty()) viewModel.searchSerie(sname)
+            if (personnes.isEmpty()|| pname.isEmpty()) viewModel.lastPersonne()
+            if (pname.isNotEmpty()) viewModel.searchPersonne(pname)
             LazyVerticalGrid(
                 cells = GridCells.Fixed(2),
                 Modifier.padding(bottom = 60.dp)
-                ) {
-                items(series) { serie ->
-                    val url =
-                        "https://image.tmdb.org/t/p/w220_and_h330_face" + serie.poster_path
+            ) {
+                items(personnes) { personne ->
+                    val url = "https://image.tmdb.org/t/p/w220_and_h330_face" + personne.profile_path
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -55,19 +54,28 @@ fun Series(navController : NavController, viewModel :MainViewModel){
                         elevation = 10.dp
                     ) {
                         Column(Modifier.padding(4.dp)) {
+                            if (personne.profile_path.isNullOrBlank()){
                             AsyncImage(
-                                model = url,
+                                model = R.drawable.acteur,
                                 contentDescription = "affiche",
                                 modifier = Modifier
                                     .height(300.dp),
                                 contentScale = ContentScale.Fit
-                            )
+                            )}
+                            else{
+                                AsyncImage(
+                                    model = url,
+                                    contentDescription = "affiche",
+                                    modifier = Modifier
+                                        .height(300.dp),
+                                    contentScale = ContentScale.Fit)
+                            }
                             Text(
-                                text = serie.name,
+                                text = personne.name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 17.sp
                             )
-                            Text(text = serie.first_air_date, fontSize = 15.sp)
+                            Text(text = personne.known_for_department, fontSize = 15.sp)
                         }
                     }
                 }

@@ -5,46 +5,24 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 //import androidx.compose.material.MaterialTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 //import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
-import com.example.appliprofil.ui.theme.AppliProfilTheme
-import java.util.*
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -75,10 +53,10 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
             Films(navController,viewmodel)
         }
         composable("series"){
-            Series(navController)
+            Series(navController,viewmodel)
         }
-        composable("acteurs"){
-            Acteurs(navController)
+        composable("stars"){
+            Personnes(navController,viewmodel)
         }
         composable("DetailFilm"){
             DetailFilm(navController)
@@ -148,7 +126,7 @@ fun ParamBottomBar(navController: NavController){
                 icon ={ Icon(painterResource(id = item.icon), contentDescription = item.title, Modifier .size(25.dp)) },
                 label = { Text(text = item.title)},
                 selectedContentColor = Color.Black,
-                unselectedContentColor = Color.Black.copy(0.7f),
+                unselectedContentColor = Color.White,
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {
@@ -173,7 +151,7 @@ fun ParamBottomBar(navController: NavController){
 sealed class NavItem(var title:String, var icon:Int, var route:String){
 object Film : NavItem("Films",R.drawable.clap ,"films")
 object Serie : NavItem("Séries",R.drawable.series, "series")
-object Acteurs : NavItem("Acteurs",R.drawable.acteur,"acteurs")
+object Acteurs : NavItem("Stars",R.drawable.acteur,"stars")
 }
 
 /*@Preview(showBackground = true)
