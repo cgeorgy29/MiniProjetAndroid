@@ -4,9 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 //import androidx.compose.material.MaterialTheme
@@ -18,14 +23,17 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 //import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +42,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.appliprofil.ui.theme.AppliProfilTheme
 import java.util.*
 
@@ -80,6 +89,46 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
 
     }
 }
+
+@OptIn(ExperimentalFoundationApi::class)
+/*@Composable
+fun ParamContent(viewModel: MainViewModel){
+    val movies by viewModel.movies.collectAsState()
+    LazyVerticalGrid(
+        cells = GridCells.Fixed(2),
+        Modifier.padding(bottom = 60.dp)
+    ) {
+        items(movies) { movie ->
+            val url =
+                "https://image.tmdb.org/t/p/w220_and_h330_face" + movie.poster_path
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .clickable { }
+                    .padding(4.dp),
+                elevation = 10.dp
+            ) {
+                Column(Modifier.padding(4.dp)) {
+                    AsyncImage(
+                        model = url,
+                        contentDescription = "affiche",
+                        modifier = Modifier
+                            .height(300.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                    Text(
+                        text = movie.original_title,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 17.sp
+                    )
+                    Text(text = movie.release_date, fontSize = 15.sp)
+                }
+            }
+        }
+    }
+}
+*/
 
 
 @Composable
