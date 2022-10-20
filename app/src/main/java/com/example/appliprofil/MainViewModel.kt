@@ -8,10 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainViewModel : ViewModel(){
-    val movies = MutableStateFlow<List<Movie>>(listOf())
-    val series = MutableStateFlow<List<Serie>>(listOf())
-    val personnes = MutableStateFlow<List<Personnes>>(listOf())
 
+    val movies = MutableStateFlow<List<Movie>>(listOf())
+    val onemovie = MutableStateFlow<DetailFilm?>(null)
+
+    val series = MutableStateFlow<List<Serie>>(listOf())
+    val oneserie = MutableStateFlow<DetailSerie?>(null)
+
+    val personnes = MutableStateFlow<List<Personnes>>(listOf())
 
     val apikey = "e29cd9d25ce42fab8b09ed1aeb4e2ea0"
     val service = Retrofit.Builder()
@@ -22,36 +26,49 @@ class MainViewModel : ViewModel(){
 
     fun searchMovie(motcle: String){
         viewModelScope.launch {
-            movies.value = service.getFilmParMotCle(motcle,apikey).results
+            movies.value = service.getFilmParMotCle(motcle,apikey,"fr").results
         }
     }
-
     fun lastMovie(){
         viewModelScope.launch {
-            movies.value = service.lastMovie(apikey).results
+            movies.value = service.lastMovie(apikey, "fr").results
         }
     }
+    fun oneMovie(id:String){
+        viewModelScope.launch {
+            onemovie.value = service.oneMovie(id,apikey,"credits","fr")
+        }
+
+    }
+
+
 
     fun searchSerie(motcle: String){
         viewModelScope.launch {
-            series.value = service.getSerieParMotCle(motcle,apikey).results
+            series.value = service.getSerieParMotCle(motcle,apikey,"fr").results
         }
     }
-
     fun lastSerie(){
         viewModelScope.launch {
-            series.value = service.lastSerie(apikey).results
+            series.value = service.lastSerie(apikey,"fr").results
         }
     }
-    fun searchPersonne(motcle: String){
+    fun oneSerie(id: String){
         viewModelScope.launch {
-            personnes.value = service.getPersonneParMotCle(motcle,apikey).results
+            oneserie.value = service.oneSerie(id, apikey, "credits", "fr")
         }
     }
 
+
+
+    fun searchPersonne(motcle: String){
+        viewModelScope.launch {
+            personnes.value = service.getPersonneParMotCle(motcle,apikey,"fr").results
+        }
+    }
     fun lastPersonne(){
         viewModelScope.launch {
-            personnes.value = service.lastPersonne(apikey).results
+            personnes.value = service.lastPersonne(apikey,"fr").results
         }
     }
 

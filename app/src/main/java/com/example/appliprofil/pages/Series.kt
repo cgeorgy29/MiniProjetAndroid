@@ -44,32 +44,7 @@ fun Series(navController : NavController, viewModel :MainViewModel){
                 Modifier.padding(bottom = 60.dp)
                 ) {
                 items(series) { serie ->
-                    val url =
-                        "https://image.tmdb.org/t/p/w220_and_h330_face" + serie.poster_path
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .clickable { }
-                            .padding(4.dp),
-                        elevation = 10.dp
-                    ) {
-                        Column(Modifier.padding(4.dp)) {
-                            AsyncImage(
-                                model = url,
-                                contentDescription = "affiche",
-                                modifier = Modifier
-                                    .height(300.dp),
-                                contentScale = ContentScale.Fit
-                            )
-                            Text(
-                                text = serie.name,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 17.sp
-                            )
-                            Text(text = serie.first_air_date, fontSize = 15.sp)
-                        }
-                    }
+                    FabCardS(serie,navController)
                 }
             }
         },
@@ -78,4 +53,34 @@ fun Series(navController : NavController, viewModel :MainViewModel){
             ParamBottomBar(navController)
         }
     )
+}
+@Composable
+fun FabCardS(serie : Serie, navController: NavController){
+    val url =
+        "https://image.tmdb.org/t/p/w220_and_h330_face" + serie.poster_path
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .clickable { navController.navigate("detailserie" + "/${serie.id}") }
+            .padding(4.dp),
+        elevation = 10.dp
+    ) {
+        Column(Modifier.padding(4.dp)) {
+            AsyncImage(
+                model = url,
+                contentDescription = "affiche",
+                modifier = Modifier
+                    .height(300.dp),
+                contentScale = ContentScale.Fit
+            )
+            Text(
+                text = serie.name,
+                fontWeight = FontWeight.Bold,
+                fontSize = 17.sp
+            )
+            Text(text = serie.first_air_date, fontSize = 15.sp)
+
+        }
+    }
 }
