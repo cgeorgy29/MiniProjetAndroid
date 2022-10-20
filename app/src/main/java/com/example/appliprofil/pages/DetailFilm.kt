@@ -47,6 +47,7 @@ fun DetailFilm (navController : NavController,idmovie:String, viewModel: MainVie
              )
         },
 
+
         content = {
             if (movie == null){
                 Text(text = "Une erreur c'est produite, retourner à la page précédente")}
