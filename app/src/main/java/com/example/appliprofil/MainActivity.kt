@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appliprofil.pages.DetailFilm
 import com.example.appliprofil.pages.DetailSerie
 import com.example.appliprofil.ui.theme.AppliProfilTheme
+import com.example.appliprofil.ui.theme.MyRed
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -53,7 +54,7 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
             Profil(tailleSc,navController )
         }
         composable("films"){
-            Films(navController,viewmodel)
+            Films(navController,viewmodel,tailleSc)
         }
         composable("series"){
             Series(navController,viewmodel)
@@ -93,7 +94,7 @@ fun ParamBottomBar(navController: NavController){
             BottomNavigationItem(
                 icon ={ Icon(painterResource(id = item.icon), contentDescription = item.title, Modifier .size(25.dp)) },
                 label = { Text(text = item.title)},
-                selectedContentColor = Color.Black,
+                selectedContentColor = MyRed,
                 unselectedContentColor = Color.White,
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,

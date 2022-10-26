@@ -1,11 +1,10 @@
 package com.example.appliprofil
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -18,6 +17,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.appliprofil.ui.theme.ExpandableSearchView
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Series(navController : NavController, viewModel :MainViewModel){
@@ -40,7 +40,7 @@ fun Series(navController : NavController, viewModel :MainViewModel){
             if (series.isEmpty()|| sname.isEmpty()) viewModel.lastSerie()
             if (sname.isNotEmpty()) viewModel.searchSerie(sname)
             LazyVerticalGrid(
-                cells = GridCells.Fixed(2),
+                columns = GridCells.Fixed(2),
                 Modifier.padding(bottom = 60.dp)
                 ) {
                 items(series) { serie ->

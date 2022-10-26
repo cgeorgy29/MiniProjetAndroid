@@ -49,6 +49,7 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
             }
         }
         else -> {
+
             Row ( verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth() ){
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Image_ppd()

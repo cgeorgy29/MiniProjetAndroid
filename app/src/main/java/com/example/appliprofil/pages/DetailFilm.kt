@@ -1,7 +1,8 @@
 package com.example.appliprofil.pages
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DetailFilm (navController : NavController,idmovie:String, viewModel: MainViewModel){
     val movie = viewModel.onemovie.collectAsState().value
