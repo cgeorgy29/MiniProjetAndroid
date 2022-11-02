@@ -24,9 +24,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun Profil(classe : WindowSizeClass, nav : NavController){
-    val classHauteur = classe.heightSizeClass
-    val classLargeur = classe.widthSizeClass
-    when (classLargeur) {
+    when (classe.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                 Image_ppd()
@@ -57,7 +55,7 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                     Texte("Elève en 4è année du cycle ingénieur")
                     Texte("Ecole d'ingénieur ISIS - INU Champolion")
                 }
-                Column() {
+                Column {
                     Row {
                         Image(imageVector = Icons.Filled.MailOutline, contentDescription = "mail")
                         Texte(carac = "georgy.crt@gmail.com")

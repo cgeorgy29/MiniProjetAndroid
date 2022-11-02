@@ -20,10 +20,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.appliprofil.pages.DetailFilm
-import com.example.appliprofil.pages.DetailSerie
-import com.example.appliprofil.ui.theme.AppliProfilTheme
-import com.example.appliprofil.ui.theme.MyRed
+import com.example.appliprofil.pages.*
+import com.example.appliprofil.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -34,15 +32,12 @@ class MainActivity : ComponentActivity() {
                 val windowSizeClass = calculateWindowSizeClass(this)
                 // A surface container using the 'background' color from the theme
                 AppliProfilTheme() {
-                    Surface(modifier = Modifier.fillMaxSize()) {
+                    Surface(modifier = Modifier.fillMaxSize()){
                         AppNavControl(windowSizeClass,viewmodel)
                     }
                 }
 
         }
-    }
-    override fun isUiContext(): Boolean {
-        return super.isUiContext()
     }
 }
 
@@ -57,19 +52,19 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
             Films(navController,viewmodel,tailleSc)
         }
         composable("series"){
-            Series(navController,viewmodel)
+            Series(navController,viewmodel,tailleSc)
         }
         composable("stars"){
-            Personnes(navController,viewmodel)
+            Personnes(navController,viewmodel, tailleSc)
         }
         composable("detailfilm" + "/{id}"){ NavBackStack ->
-            var  id = NavBackStack.arguments?.getString("id")
+            val id = NavBackStack.arguments?.getString("id")
             if (id != null) {
                 DetailFilm(navController,id, viewmodel)
             }
         }
         composable("detailserie" + "/{id}"){ NavBackStack ->
-            var id = NavBackStack.arguments?.getString("id")
+            val id = NavBackStack.arguments?.getString("id")
             if (id != null){
                 DetailSerie(navController, id, viewmodel)
             }
@@ -114,7 +109,6 @@ fun ParamBottomBar(navController: NavController){
         }
     }
 }
-
 
 
 sealed class NavItem(var title:String, var icon:Int, var route:String){

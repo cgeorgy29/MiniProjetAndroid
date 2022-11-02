@@ -17,8 +17,8 @@ class MainViewModel : ViewModel(){
 
     val personnes = MutableStateFlow<List<Personnes>>(listOf())
 
-    val apikey = "e29cd9d25ce42fab8b09ed1aeb4e2ea0"
-    val service = Retrofit.Builder()
+    private val apikey = "e29cd9d25ce42fab8b09ed1aeb4e2ea0"
+    private val service: TmdbAPI = Retrofit.Builder()
         .baseUrl("https://api.themoviedb.org/")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
