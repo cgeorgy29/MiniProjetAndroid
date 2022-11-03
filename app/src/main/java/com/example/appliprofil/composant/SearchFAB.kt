@@ -1,4 +1,4 @@
-package com.example.appliprofil.compo
+package com.example.appliprofil.composant
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Arrangement

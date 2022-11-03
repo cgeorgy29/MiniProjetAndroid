@@ -1,10 +1,11 @@
-package com.example.appliprofil.compo
+package com.example.appliprofil.composant
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.appliprofil.R
@@ -93,7 +95,6 @@ fun ExpandedSearchView(
     var textFieldValue by remember {
         mutableStateOf(TextFieldValue(searchDisplay, TextRange(searchDisplay.length)))
     }
-   // var test = true
 
     Row(
 
@@ -103,10 +104,9 @@ fun ExpandedSearchView(
     ) {
 
         IconButton(onClick = {
-            textFieldFocusRequester.freeFocus()
+            textFieldValue = TextFieldValue("")
             onSearchDisplayClosed()
             onExpandedChanged(false)
-            textFieldValue = TextFieldValue("")
         }) {
             Icon(
                 painter = painterResource(id = R.drawable.back),
@@ -130,7 +130,8 @@ fun ExpandedSearchView(
                 onDone = {
                     focusManager.clearFocus()
                 }
-            )
+            ),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search)
         )
     }
 }
