@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.appliprofil.MainViewModel
-import com.example.appliprofil.ParamBottomBar
 import com.example.appliprofil.composant.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")

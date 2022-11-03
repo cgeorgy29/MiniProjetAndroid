@@ -32,11 +32,10 @@ class MainActivity : ComponentActivity() {
                 val windowSizeClass = calculateWindowSizeClass(this)
                 // A surface container using the 'background' color from the theme
                 AppliProfilTheme() {
-                    Surface(modifier = Modifier.fillMaxSize()){
+                    Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background.copy()){
                         AppNavControl(windowSizeClass,viewmodel)
                     }
                 }
-
         }
     }
 }
@@ -72,64 +71,3 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
 
     }
 }
-
-@Composable
-fun ParamBottomBar(navController: NavController){
-    val items = listOf(
-        NavItem.Film,
-        NavItem.Serie,
-        NavItem.Acteurs
-    )
-    BottomNavigation(
-        contentColor = Color.Black
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
-            BottomNavigationItem(
-                icon ={ Icon(painterResource(id = item.icon), contentDescription = item.title, Modifier .size(25.dp)) },
-                label = { Text(text = item.title)},
-                selectedContentColor = MyRed,
-                unselectedContentColor = Color.White,
-                alwaysShowLabel = true,
-                selected = currentRoute == item.route,
-                onClick = {
-                navController.navigate(item.route){
-                navController.graph.startDestinationRoute?.let {
-                                route ->
-                            popUpTo(route){
-                                saveState = true
-                            }
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
-            )
-        }
-    }
-}
-
-
-sealed class NavItem(var title:String, var icon:Int, var route:String){
-object Film : NavItem("Films",R.drawable.clap ,"films")
-object Serie : NavItem("Séries",R.drawable.series, "series")
-object Acteurs : NavItem("Stars",R.drawable.acteur,"stars")
-}
-
-/*@Preview(showBackground = true)
-@Composable
-fun BottomBarPreview(){
-    ParamBottomBar()
-}*/
-
-
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AppliProfilTheme {
-        Screen(windowSizeClass)
-    }
-}*/

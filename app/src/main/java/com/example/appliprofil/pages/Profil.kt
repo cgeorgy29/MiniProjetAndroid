@@ -1,21 +1,20 @@
 package com.example.appliprofil
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
-//import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-//import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,11 +33,16 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                 Spacer(Modifier.height(50.dp))
 
                 Row {
-                    Image(imageVector = Icons.Filled.MailOutline, contentDescription = "mail")
+                    Icon(painterResource(id = R.drawable.mail),
+                        contentDescription = "mail",
+                        modifier = Modifier.size(18.dp))
+
                     Texte(carac = "georgy.crt@gmail.com")
                 }
                 Row {
-                    Image(imageVector = Icons.Filled.Star, contentDescription = "mail")
+                    Icon(painterResource(id = R.drawable.favori),
+                        contentDescription = "linkedin",
+                        modifier = Modifier.size(18.dp))
                     Texte(carac = "www.linkedin.com/in/corentin-georgy")
                 }
                 Button(onClick = { nav.navigate("films")}) {
@@ -57,11 +61,18 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                 }
                 Column {
                     Row {
-                        Image(imageVector = Icons.Filled.MailOutline, contentDescription = "mail")
+                        Icon(painterResource(id = R.drawable.mail),
+                            contentDescription = "mail",
+                            modifier = Modifier.size(18.dp))
+
+
                         Texte(carac = "georgy.crt@gmail.com")
                     }
-                    Row {
-                        Image(imageVector = Icons.Filled.Star, contentDescription = "mail")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(painterResource(id = R.drawable.favori),
+                            contentDescription = "linkedin",
+                            modifier = Modifier.size(18.dp))
+
                         Texte(carac = "www.linkedin.com/in/corentin-georgy")
                     }
                     Spacer(Modifier.height(30.dp))
@@ -69,8 +80,6 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                         Text(text = "Button")
                     }
                 }
-
-
             }
         }
     }
@@ -78,11 +87,26 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
 
 @Composable
 fun Image_ppd() {
-    Image(painterResource(id = R.mipmap.yoruppd), contentDescription = "photo de profil",
-        Modifier
-            .clip(CircleShape)
-            .size(200.dp)
-    )
+    if(isSystemInDarkTheme()){
+        Image(painterResource(id = R.drawable.yorublack2), contentDescription = "photo de profil",
+            Modifier
+                .padding(5.dp)
+                .clip(CircleShape)
+                .border(color = Color.White, width = 2.dp, shape = CircleShape)
+                .size(200.dp)
+        )
+    }
+    else {
+        Image(painterResource(id = R.drawable.yoruwhite), contentDescription = "photo de profil",
+            Modifier
+                .padding(5.dp)
+                .clip(CircleShape)
+                .border(color = Color.Black, width = 2.dp, shape = CircleShape)
+                .size(200.dp)
+        )
+    }
+
+
 }
 
 @Composable
@@ -91,5 +115,5 @@ fun Titre(carac: String){
 }
 @Composable
 fun Texte(carac : String){
-    Text(text = carac, fontSize = 14.sp)
+    Text(text = carac, fontSize = 14.sp, modifier = Modifier.padding(start = 6.dp))
 }

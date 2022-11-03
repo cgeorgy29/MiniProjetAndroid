@@ -12,6 +12,6 @@ val Teal200 = Color(0xFF03DAC5)
 //Mon Thème
 val BleuMain = Color(0xFF1D3557)
 val BleuSec = Color(0xFF457B9D)
-val BleuTer = Color (0xFFA8DADC)
+val Gold = Color (0xFFFFC300)
 val WhiteSmoke = Color(0xFFF1FAEE)
 val MyRed = Color(0xFFE63946)
