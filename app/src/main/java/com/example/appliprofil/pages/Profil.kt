@@ -46,7 +46,7 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                     Texte(carac = "www.linkedin.com/in/corentin-georgy")
                 }
                 Button(onClick = { nav.navigate("films")}) {
-                    Text(text = "Button")
+                    Text(text = "Start")
                 }
             }
         }
@@ -77,7 +77,7 @@ fun Profil(classe : WindowSizeClass, nav : NavController){
                     }
                     Spacer(Modifier.height(30.dp))
                     Button(onClick = {nav.navigate("films")}, modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                        Text(text = "Button")
+                        Text(text = "Start")
                     }
                 }
             }

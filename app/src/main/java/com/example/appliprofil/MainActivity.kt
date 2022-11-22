@@ -59,13 +59,13 @@ fun AppNavControl (tailleSc: WindowSizeClass, viewmodel: MainViewModel){
         composable("detailfilm" + "/{id}"){ NavBackStack ->
             val id = NavBackStack.arguments?.getString("id")
             if (id != null) {
-                DetailFilm(navController,id, viewmodel)
+                DetailFilm(navController,id, viewmodel, tailleSc)
             }
         }
         composable("detailserie" + "/{id}"){ NavBackStack ->
             val id = NavBackStack.arguments?.getString("id")
             if (id != null){
-                DetailSerie(navController, id, viewmodel)
+                DetailSerie(navController, id, viewmodel,tailleSc)
             }
         }
 
